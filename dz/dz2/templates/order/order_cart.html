@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Product list
+{% endblock %}
+{% block content %}
+    <h1>Product list</h1>
+    <table class="product">
+        <tbody>
+        {% for product in products %}
+            {% with item=product %}
+        <div>
+                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                  <p>Product:  {{product.name}}</p>
+                  <p>Description:    {{product.description}}</p>
+                  <p>Quantity:    {{ product.quantity }}</p>
+                  <p>Unit price:   {{product.price}}</p>
+                  <p>{{ cart_product_form.quantity }}</p>
+                    {% csrf_token %}
+                   <p> <input type="submit" value="Add to cart"></p>
+                </form>
+            {% endwith %}
+        </div>
+        {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="#" class="button">Оформить заказ</a>
+    </p>
+{% endblock %}

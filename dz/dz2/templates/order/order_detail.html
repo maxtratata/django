@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Информация о заказе</title>
+</head>
+<body>
+    <h1>Информация о заказе</h1>
+    <p>Заказ ID: {{ order.id }}</p>
+    <p>Клиент: {{ order.client }}</p>
+    <p>Состав заказа: {{ order.products }}</p>
+    <p>Общая стоимость: {{ order.total_amount }}</p>
+    <p>Дата заказа: {{ order.order_date }}</p>
+</body>
+</html>

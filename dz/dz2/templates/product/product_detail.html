@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}
+    Создать продукт
+{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data" role="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons submit='Save' reset="Cancel" %}{% endbuttons %}
+    </form>
+
+{% endblock %}

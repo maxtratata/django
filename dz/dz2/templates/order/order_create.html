@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% load render_table from django_tables2 %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}"/>
+    <title>Создать заказ</title>
+</head>
+{% block content %}
+<h1>Создать заказ</h1>
+<table class="cart">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Unit price</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+    <tr>
+    {% with product=item.product %}
+<!--        <td>-->
+<!--            <a href="{{ product.get_absolute_url }}">-->
+<!--                <img src="-->
+<!--                                {% if product.image %}-->
+<!--                                    {{ product.image.url }}-->
+<!--                                {% else %}-->
+<!--                                    {% static " img/no_image.png" %}-->
+<!--                {% endif %}">-->
+<!--            </a>-->
+<!--        </td>-->
+        <td>{{ product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td class="num">${{ item.price }}</td>
+        <td class="num">${{ item.total_price }}</td>
+    {% endwith %}
+    </tr>
+    {% endfor %}
+    <tr class="total">
+        <td>Total:</td>
+        <td class="num">${{ cart.get_total_price }}</td>
+    </tr>
+    </tbody>
+</table>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать</button>
+</form>
+{% endblock %}
+</html>
+
+
+

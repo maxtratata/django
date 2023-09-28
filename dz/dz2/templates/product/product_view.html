@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Продукт
+{% endblock %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="product-detail">
+            <img src="{{product.imageURL}}" />
+        </div>
+        <div>
+            <h1>{{ product.name }}</h1>
+            <p class="price">${{ product.price }}</p>
+            {{ product.description|linebreaks }}
+        </div>
+        <div class="submit-row">
+            <input type="submit" value="Update" name="_update">
+            <input type="submit" value="Delete" name="_delete">
+        </div>
+    </form>
+
+<!--<p class="text-right">-->
+<!--    <button type="button"><a href="update" class="button">Редактировать</a>-->
+<!--    </button>-->
+<!--</p>-->
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load static %}
+{% block content %}
+    <div id="main" class="product-list">
+
+        {% for product in products %}
+            <div>
+                <a href="{{ product.get_absolute_url }}">
+                    <img class="img-fluid" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'product_view' product.id %}">{{ product.name }}</a><br>
+                ${{ product.price }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

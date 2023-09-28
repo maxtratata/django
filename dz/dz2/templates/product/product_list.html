@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Products
+{% endblock %}
+{% block content %}
+    <div id="main" class="product-list">
+        <h1>Products</h1>
+        <div>
+            <a class="btn btn-primary" href="/product/create/">Создать</a>
+        </div>
+    </div>
+    <div>
+        {% include "product/product.html" %}
+    </div>
+{% endblock %}
+
+
+<!--        <li><a href="{% url 'product_detail' product.id %}">{{ product.id }}</a></li>-->

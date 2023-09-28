@@ -1,0 +1,73 @@
+{% load render_table from django_tables2 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+    <title>ДЗ2</title>
+    <style>
+        .tab {
+            display: none;
+        }
+    </style>
+    <script>
+        function openTab(tabName) {
+            var i, tabs;
+            tabs = document.getElementsByClassName("tab");
+            for (i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <h1>Список пользователей, заказов и продуктов</h1>
+
+    <button onclick="openTab('clients')">Пользователи</button>
+    <button onclick="openTab('orders')">Заказы</button>
+    <button onclick="openTab('products')">Продукты</button>
+
+    <div id="clients" class="tab">
+        <h2>Пользователи:</h2>
+        <ul>
+                {% render_table clients %}
+<!--            {% for client in clients %}-->
+<!--                <li>{{ client.name }} - {{ client.email }}</li>-->
+<!--            {% endfor %}-->
+        </ul>
+        <div>
+            <a class="btn btn-primary" href="/client/create/">
+                <button type="button" >Создать</button>
+            </a>
+        </div>
+    </div>
+
+    <div id="orders" class="tab">
+        <h2>Заказы:</h2>
+        <ul>
+            {% render_table orders %}
+        </ul>
+        <div>
+            <a class="btn btn-primary" href="/order/order_cart/">
+                <button type="button" >Создать</button>
+            </a>
+        </div>
+    </div>
+
+    <div id="products" class="tab">
+        <h2>Продукты:</h2>
+        <div>
+            <a class="btn btn-primary" href="/product/create/">
+                <button type="button" >Создать</button>
+            </a>
+        </div>
+        <div>
+            {% include "product/product.html" %}
+        </div>
+    </div>
+    <script>
+        openTab('users');
+    </script>
+</body>
+</html>
